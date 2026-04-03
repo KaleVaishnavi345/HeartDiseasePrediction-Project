@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Heart Health</title>
+    <style>
+        :root { --primary: #006064; --success: #2e7d32; --danger: #c62828; }
+        body { background: #e0f2f1; font-family: 'Segoe UI', sans-serif; padding: 20px; margin: 0; }
+        .dashboard-container { max-width: 1000px; margin: auto; }
+
+        .glass-header { 
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(10px);
+            padding: 20px; border-radius: 15px; display: flex; 
+            justify-content: space-between; align-items: center; margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+
+        .glass-card { 
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);
+            padding: 30px; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            display: flex; flex-direction: column;
+        }
+
+        .user-badge {
+            background: var(--primary); color: white; padding: 5px 15px;
+            border-radius: 20px; font-size: 0.9rem; margin-top: 5px; display: inline-block;
+        }
+
+        .btn-action { 
+            width: 100%; padding: 15px; background: var(--primary); color: white; 
+            border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: auto;
+            transition: background 0.3s;
+        }
+        .btn-action:hover { background: #004d40; }
+
+        .chart-img { width: 100%; border-radius: 10px; margin-top: 10px; border: 1px solid #ddd; background: white;}
+        .status-active { color: var(--success); font-weight: bold; }
+        .logout-link { color: var(--danger); text-decoration: none; margin-left: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="glass-header">
+            <div>
+                <h2 style="margin:0;">Cardiovascular Analysis System</h2>
+                <div class="user-badge">Authorized Access: {{ username }}</div>
+            </div>
+            <div class="user-info">
+                <a href="/logout" class="logout-link">Logout</a>
+            </div>
+        </header>
+
+        <div class="main-grid">
+            <div class="glass-card">
+                <h3>Patient Assessment</h3>
+                <p>Evaluate heart disease risk based on clinical parameters (Age, BP, ECG, etc.) and patient test results.</p>
+                <img src="https://img.freepik.com/free-vector/doctor-examining-patient-clinic_23-2148853675.jpg" style="width:100%; border-radius:10px; margin-bottom:15px;">
+                <button class="btn-action" onclick="location.href='/prediction_form'">START NEW ASSESSMENT</button>
+            </div>
+
+            <div class="glass-card">
+                <h3>Model Statistics</h3>
+                <div class="stats-box">
+                    <p>Algorithm: <strong>Logistic Regression</strong></p>
+                    <p>Status: <span class="status-active">● Active</span></p>
+                </div>
+                <hr style="border:0; border-top:1px solid #ccc; width:100%;">
+                <p style="font-size: 0.85em; color: #555; margin-top: 10px;">Feature Correlation Map:</p>
+                <img src="{{ url_for('static', filename='images/correlation_heatmap.png') }}" alt="Correlation Heatmap" class="chart-img">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

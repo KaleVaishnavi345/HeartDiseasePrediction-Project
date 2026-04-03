@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Analysis Result</title>
+    <style>
+      body {
+        background: linear-gradient(140deg, #eaf7ff 0%, #effbf6 100%);
+        font-family: "Segoe UI", sans-serif;
+        display: flex;
+        justify-content: center;
+        padding: 26px;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        padding: 32px;
+        border-radius: 18px;
+        box-shadow: 0 16px 42px rgba(16, 73, 111, 0.16);
+        border: 1px solid rgba(12, 104, 140, 0.12);
+        max-width: 620px;
+        width: 100%;
+        text-align: center;
+      }
+      .btn-action {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(90deg, #0e8ca7, #0b6f8a);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 20px;
+        font-weight: 700;
+      }
+      .tips {
+        text-align: left;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+      .donut-wrap {
+        margin: 22px auto 10px auto;
+        width: 240px;
+      }
+      .semi-donut {
+        --percentage: 50;
+        --fill: #ef5350;
+        width: 220px;
+        height: 110px;
+        border-radius: 220px 220px 0 0;
+        background: conic-gradient(from 180deg, var(--fill) calc(var(--percentage) * 1%), #dfe6e9 0);
+        position: relative;
+        overflow: hidden;
+      }
+      .semi-donut::before {
+        content: "";
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        width: 180px;
+        height: 90px;
+        border-radius: 180px 180px 0 0;
+        background: rgba(255, 255, 255, 0.92);
+      }
+      .donut-label {
+        margin-top: 8px;
+        font-size: 0.95rem;
+        color: #444;
+      }
+      .stats {
+        text-align: left;
+        background: rgba(255, 255, 255, 0.55);
+        border-radius: 10px;
+        padding: 12px 15px;
+        margin-top: 14px;
+      }
+      .stats p {
+        margin: 6px 0;
+      }
+      .status-chip {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 0.86rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      .model-note {
+        color: #425a67;
+        margin-top: 10px;
+        margin-bottom: 4px;
+      }
+      .legend {
+        margin-top: 12px;
+        font-size: 0.86rem;
+        color: #4a616c;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glass-card">
+    <h2>Assessment Result</h2>
+
+    {% if "High" in prediction %}
+        <div class="status-chip" style="background:#ffe7ea;color:#9b2231;">ML Result: High Risk</div>
+        <div style="background: #f8d7da; color: #721c24; padding: 20px; border-radius: 10px;">
+            <h1 style="margin: 0;">HIGH RISK</h1>
+            <p>Model indicates stronger heart-disease risk patterns in the entered values.</p>
+        </div>
+
+        <div class="tips">
+            <strong>Recommended Actions:</strong>
+            <ul>
+                <li>Consult a cardiologist immediately.</li>
+                <li>Monitor your blood pressure daily.</li>
+                <li>Avoid high-sodium and processed foods.</li>
+            </ul>
+        </div>
+
+    {% else %}
+        <div class="status-chip" style="background:#e0f7ee;color:#16633e;">ML Result: Low Risk</div>
+        <div style="background: #d4edda; color: #155724; padding: 20px; border-radius: 10px;">
+            <h1 style="margin: 0;">LOW RISK</h1>
+            <p>Model indicates mostly healthy patterns in the entered values.</p>
+        </div>
+
+        <div class="tips">
+            <strong>Stay Healthy:</strong>
+            <ul>
+                <li>Maintain a balanced, heart-healthy diet.</li>
+                <li>Exercise regularly.</li>
+                <li>Go for regular health check-ups.</li>
+            </ul>
+        </div>
+    {% endif %}
+
+    <p class="model-note">Model Used: <strong>{{ model_used }}</strong></p>
+    <div class="donut-wrap">
+      {% set donut_color = '#ef5350' if "High" in prediction else '#26a69a' %}
+      <div class="semi-donut" style="--percentage: {{ probability }}; --fill: {{ donut_color }};"></div>
+      <div class="donut-label">Prediction Confidence: <strong>{{ "%.2f"|format(probability) }}%</strong></div>
+      <div class="legend">Red = high-risk confidence, Green = low-risk confidence</div>
+    </div>
+
+    <div class="stats">
+      <p><strong>High-Risk Probability:</strong> {{ "%.2f"|format(high_risk_probability) }}%</p>
+      <p><strong>Low-Risk Probability:</strong> {{ "%.2f"|format(low_risk_probability) }}%</p>
+      <p><strong>How to read this:</strong> The larger probability indicates the model's chosen class.</p>
+    </div>
+
+    <button class="btn-action" onclick="location.href='/prediction_form'">New Assessment</button>
+    <p><a href="/dashboard">Back to Dashboard</a></p>
+</div>
+  </body>
+</html>

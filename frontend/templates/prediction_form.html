@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Risk Assessment - Heart Health</title>
+    <style>
+      body {
+        background: linear-gradient(130deg, #dff4ff 0%, #edf7ff 40%, #f4fffb 100%);
+        font-family: "Segoe UI", sans-serif;
+        padding: 40px;
+        margin: 0;
+      }
+      .glass-form {
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        padding: 30px 32px;
+        border-radius: 18px;
+        max-width: 920px;
+        margin: auto;
+        box-shadow: 0 16px 45px rgba(18, 75, 116, 0.18);
+        border: 1px solid rgba(9, 129, 141, 0.16);
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      .form-group {
+        margin-bottom: 10px;
+      }
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 7px;
+        color: #0a5566;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #cbd9e2;
+        background: #fff;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+      }
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: #0aa3b8;
+        box-shadow: 0 0 0 4px rgba(10, 163, 184, 0.15);
+      }
+      details {
+        background: #f5fbfc;
+        padding: 9px 10px;
+        border-radius: 8px;
+        margin-top: 5px;
+        font-size: 0.82rem;
+        color: #34515e;
+        border-left: 3px solid #18a4b4;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: 600;
+        color: #0b7f8d;
+      }
+      button {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(90deg, #0e8ca7, #0b6f8a);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        margin-top: 20px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        transition: 0.25s;
+      }
+      button:hover {
+        filter: brightness(1.05);
+        transform: translateY(-2px);
+      }
+      .hero {
+        text-align: center;
+        margin-bottom: 18px;
+      }
+      .hero h2 {
+        margin: 0 0 8px 0;
+        color: #0c4f61;
+      }
+      .hero p {
+        margin: 0;
+        color: #4d6977;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="glass-form">
+      <div class="hero">
+        <h2>Heart Disease Assessment Form</h2>
+        <p>Enter patient details to generate an ML-based risk report.</p>
+      </div>
+
+      <form action="/predict" method="POST">
+        <div class="form-group">
+          <label>Prediction Algorithm</label>
+          <select name="model_name">
+            <option value="ensemble">Ensemble (recommended for stable confidence)</option>
+            <option value="logistic_regression">Logistic Regression (recommended)</option>
+            <option value="best_model">Best Comparison Model (Random Forest / Decision Tree)</option>
+          </select>
+          <details>
+            <summary>Why?</summary>
+            You can compare two trained ML algorithms. If not sure, keep Logistic Regression.
+          </details>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Age(years)</label>
+            <input type="number" name="age" min="18" max="100" required />
+            <details>
+              <summary>Why?</summary>
+              Higher age increases heart risk. (Age)
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>Gender(Sex)</label>
+            <select name="sex"> 
+              <option value="0">Female</option>
+              <option value="1">Male</option>
+            </select>
+            <details>
+              <summary>Why?</summary>
+              Risk differs between male and female.
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>Chest Pain Type(cp)</label>
+            <select name="cp">
+              <option value="0">Typical Angina</option>
+              <option value="1">Atypical Angina</option>
+              <option value="2">Non-anginal Pain</option>
+              <option value="3">Asymptomatic</option>
+            </select>
+            <details>
+              <summary>Why?</summary>
+              Type of chest pain shows heart condition.
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>Resting Blood Pressure in mmHg(trestbps)</label>
+            <input type="number" name="trestbps" min="80" max="250" required />
+            <details>
+              <summary>Why?</summary>
+              High BP can damage arteries. (BP Level)
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>Cholesterol Level in mg/dL(chol)</label>
+            <input type="number" name="chol" min="100" max="700" required />
+            <details>
+              <summary>Why?</summary>
+              High cholesterol blocks blood flow. (Chol Level)
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>Fasting Blood Sugar > 120 mg/dL(fbs)</label>
+            <select name="fbs">
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+            <details>
+              <summary>Why?</summary>
+              High sugar increases heart risk. (Sugar Level)
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>ECG Result at Rest(restecg)</label>
+            <select name="restecg">
+              <option value="0">Normal</option>
+              <option value="1">ST-T wave abnormality</option>
+              <option value="2">Left ventricular hypertrophy</option>
+            </select>
+            <details>
+              <summary>Why?</summary>
+              Checks heart electrical activity. (ECG Result)
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>Maximum Heart Rate (thalach)</label>
+            <input type="number" name="thalach" min="60" max="230" required />
+            <details>
+              <summary>Why?</summary>
+              Low heart rate may signal risk. (Max HR)
+            </details>
+          </div>
+
+            <div class="form-group">
+                <label>Exercise Induced Angina(exang)</label>
+                <select name="exang">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+                </select>
+                <details>
+                <summary>Why?</summary>
+                Angina during exercise shows heart stress. (Exercise Angina)
+                </details>
+            </div>
+
+          <div class="form-group">
+            <label>ST Depression Value(oldpeak)</label>
+            <input type="number" name="oldpeak" min="0" max="10" step="0.1" required />
+            <details>
+              <summary>Why?</summary>
+              Shows stress on heart during exercise. (Heart Stress)
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>ST Segment Slope(slope)</label>
+            <select name="slope">
+                <option value="0">Upsloping (Healthy)</option>
+                <option value="1">Flat</option>
+                <option value="2">Downsloping (High Risk)</option>
+            </select>
+            <details>
+              <summary>Why?</summary>
+              Shows recovery of heart after activity. (Recovery Rate)
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>Major Blood Vessels Count(ca)</label>
+            <input type="number" name="ca" min="0" max="4" required />
+            <details>
+              <summary>Why?</summary>
+              Number of blocked vessels in heart. (Blocked Vessels, CA)
+            </details>
+          </div>
+
+          <div class="form-group">
+            <label>Thalassemia Test Result(thal)</label>
+            <select name="thal">
+              <option value="0">Unknown</option>
+              <option value="1">Normal</option>
+              <option value="2">Fixed Defect</option>
+              <option value="3">Reversible Defect</option>
+            </select>
+            <details>
+              <summary>Why?</summary>
+              Shows blood flow issues in heart. (Blood Flow , THAL)
+            </details>
+          </div>
+        </div>
+
+        <button type="submit">GENERATE REPORT</button>
+      </form>
+
+      <p style="text-align: center; margin-top: 15px">
+        <a href="/dashboard">← Back to Dashboard</a>
+      </p>
+    </div>
+  </body>
+</html>
