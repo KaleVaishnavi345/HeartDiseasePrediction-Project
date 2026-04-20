@@ -1,0 +1,193 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Normal Ranges - Heart Health</title>
+    <style>
+      body {
+        background: linear-gradient(130deg, #dff4ff 0%, #edf7ff 40%, #f4fffb 100%);
+        font-family: "Segoe UI", sans-serif;
+        margin: 0;
+        padding: 35px 20px;
+      }
+      .glass-card {
+        max-width: 980px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.93);
+        backdrop-filter: blur(10px);
+        border-radius: 18px;
+        border: 1px solid rgba(9, 129, 141, 0.16);
+        box-shadow: 0 16px 45px rgba(18, 75, 116, 0.18);
+        padding: 26px 28px;
+      }
+      .hero {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .hero h2 {
+        margin: 0 0 8px 0;
+        color: #0c4f61;
+      }
+      .hero p {
+        margin: 0;
+        color: #4d6977;
+      }
+      .info-note {
+        margin: 14px 0 18px 0;
+        background: #f4fbff;
+        border-left: 4px solid #1a9bb0;
+        border-radius: 8px;
+        padding: 12px 14px;
+        color: #34515e;
+        font-size: 0.93rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+      th {
+        text-align: left;
+        background: #e8f6fb;
+        color: #0a5566;
+        font-size: 0.93rem;
+        padding: 12px;
+        border-bottom: 1px solid #d5e8ef;
+      }
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #e9f0f4;
+        color: #274553;
+        vertical-align: top;
+      }
+      tr:hover td {
+        background: #fbfeff;
+      }
+      .tag {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 999px;
+        font-size: 0.76rem;
+        font-weight: 700;
+        background: #e6f7ee;
+        color: #16633e;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+        flex-wrap: wrap;
+      }
+      .action-link {
+        text-decoration: none;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-weight: 600;
+      }
+      .action-primary {
+        background: linear-gradient(90deg, #0e8ca7, #0b6f8a);
+        color: #fff;
+      }
+      .action-secondary {
+        background: #ebf4f8;
+        color: #1f5263;
+        border: 1px solid #d4e5ed;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glass-card">
+      <div class="hero">
+        <h2>Normal Range Guide for Input Fields</h2>
+        <p>Use this guide before filling the heart disease prediction form.</p>
+      </div>
+
+      <div class="info-note">
+        These ranges are for awareness only and can vary with age, gender, and medical conditions.
+        Clinical advice from a doctor always has higher priority than this guide.
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Input</th>
+            <th>Normal / Preferred Range</th>
+            <th>Meaning for Patients</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Age</td>
+            <td>18 to 100 years (model input range)</td>
+            <td>Risk generally increases with higher age.</td>
+          </tr>
+          <tr>
+            <td>Resting Blood Pressure (`trestbps`)</td>
+            <td><span class="tag">Around 90 to 120 mmHg</span></td>
+            <td>Consistently high BP can increase heart disease risk.</td>
+          </tr>
+          <tr>
+            <td>Cholesterol (`chol`)</td>
+            <td><span class="tag">Below 200 mg/dL preferred</span></td>
+            <td>Higher cholesterol can lead to plaque buildup in arteries.</td>
+          </tr>
+          <tr>
+            <td>Fasting Blood Sugar (`fbs`)</td>
+            <td>Normal: `No` (<= 120 mg/dL)</td>
+            <td>Higher fasting sugar is linked with metabolic and heart risk.</td>
+          </tr>
+          <tr>
+            <td>Resting ECG (`restecg`)</td>
+            <td>Normal: value `0`</td>
+            <td>Abnormal ECG values may indicate electrical changes in the heart.</td>
+          </tr>
+          <tr>
+            <td>Maximum Heart Rate (`thalach`)</td>
+            <td>Often healthy when not too low for age</td>
+            <td>Very low exercise heart-rate response can suggest reduced fitness/cardiac function.</td>
+          </tr>
+          <tr>
+            <td>Exercise Induced Angina (`exang`)</td>
+            <td>Preferred: `No`</td>
+            <td>Chest pain during exercise may indicate ischemic stress.</td>
+          </tr>
+          <tr>
+            <td>ST Depression (`oldpeak`)</td>
+            <td><span class="tag">Closer to 0 is better</span></td>
+            <td>Higher ST depression can indicate stress-related heart strain.</td>
+          </tr>
+          <tr>
+            <td>ST Slope (`slope`)</td>
+            <td>Preferred: Upsloping (`0`)</td>
+            <td>Flat/downsloping patterns are often associated with higher risk findings.</td>
+          </tr>
+          <tr>
+            <td>Major Vessels (`ca`)</td>
+            <td><span class="tag">0 is ideal</span></td>
+            <td>More affected vessels can indicate more severe coronary involvement.</td>
+          </tr>
+          <tr>
+            <td>Thalassemia (`thal`)</td>
+            <td>Preferred: Normal (`1`)</td>
+            <td>Defect results can be associated with perfusion abnormalities.</td>
+          </tr>
+          <tr>
+            <td>Chest Pain Type (`cp`)</td>
+            <td>No single normal value</td>
+            <td>Asymptomatic or angina patterns may carry different risk implications.</td>
+          </tr>
+          <tr>
+            <td>Sex (`sex`)</td>
+            <td>No normal/abnormal classification</td>
+            <td>This is a demographic feature used by the prediction model.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="actions">
+        <a class="action-link action-primary" href="/prediction_form">Go to Prediction Form</a>
+        <a class="action-link action-secondary" href="/dashboard">Back to Dashboard</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -81,6 +81,12 @@ def prediction_form():
         return render_template('prediction_form.html')
     return redirect(url_for('login'))
 
+@app.route('/normal_ranges')
+def normal_ranges():
+    if 'user_name' in session:
+        return render_template('normal_ranges.html')
+    return redirect(url_for('login'))
+
 
 # ---------------- PREDICTION ----------------
 @app.route('/predict', methods=['POST'])

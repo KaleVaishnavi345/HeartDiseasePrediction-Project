@@ -93,6 +93,20 @@
         margin: 0;
         color: #4d6977;
       }
+      .quick-link {
+        margin-top: 12px;
+        display: inline-block;
+        padding: 9px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        color: #0b6170;
+        background: #e8f7fb;
+        border: 1px solid #b7e4ec;
+      }
+      .quick-link:hover {
+        background: #dcf2f8;
+      }
     </style>
   </head>
 
@@ -101,6 +115,7 @@
       <div class="hero">
         <h2>Heart Disease Assessment Form</h2>
         <p>Enter patient details to generate an ML-based risk report.</p>
+        <a class="quick-link" href="/normal_ranges">View Normal Range Guide</a>
       </div>
 
       <form action="/predict" method="POST">
@@ -111,10 +126,6 @@
             <option value="logistic_regression">Logistic Regression (recommended)</option>
             <option value="best_model">Best Comparison Model (Random Forest / Decision Tree)</option>
           </select>
-          <details>
-            <summary>Why?</summary>
-            You can compare two trained ML algorithms. If not sure, keep Logistic Regression.
-          </details>
         </div>
 
         <div class="form-grid">
